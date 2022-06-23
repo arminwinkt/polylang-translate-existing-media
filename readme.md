@@ -24,6 +24,7 @@ Basic feature list:
  * Takes care all post types (that are not 'attachment', 'revision', 'acf-field', 'acf-field-group', 'nav_menu_item', 'polylang_mo')
  * Image translations are linked automatically
  * You can add your own custom fields that have image IDs
+ * You can translate medias in custom fields via  regex (useful for ACF Fields like repeater or flexible content)
  * Uses Polylang's functions, no messing around
 
 **This is open source and I cannot give you any guarantees, though it has worked for me in many projects. Please, report issues and contribute!**
@@ -76,6 +77,14 @@ function prefix_custom_fields_to_translate($custom_fields) {
 add_filter( 'polylang-translate-existing-media-custom-fields-with-image-id', 'prefix_custom_fields_to_translate' );
 ```
 
+**Add your own custom fields with a regex that have images saved as IDs:**  
+(useful for ACF custom fields in a repeater or flexible-content field)
+
+```
+add_filter( 'polylang-translate-existing-media-custom-fields-regex-with-image-id', function($regex) {
+  return "/^[^_](?:.*?)(?:benefits_image|preview_image|image|preview_image|facts_image|logo)$/";
+});
+```
 
 ## Issues and feature whishlist
 
@@ -89,6 +98,10 @@ add_filter( 'polylang-translate-existing-media-custom-fields-with-image-id', 'pr
  * Replacing count might be off, make it more informative
 
 ## Changelog
+
+### 0.3
+
+* Add filter for translating all custom fields of a post with regex
 
 ### 0.2.2
 
